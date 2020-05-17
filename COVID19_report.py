@@ -1,8 +1,20 @@
 import re,os,requests
 from tkinter import *
-from PIL import ImageTk, Image
+import platform
 from datetime import datetime
 from time import sleep
+try :
+	from PIL import ImageTk, Image
+except ImportError:
+	os.system('pip3 install pillow')
+	lookup = platform.system()
+	if lookup == 'Linux':
+		os.system('sudo apt-get install python3-pil python3-pil.imagetk')
+	
+	
+
+
+
 
 def getcountry():
 	#Get Country Name For URL
