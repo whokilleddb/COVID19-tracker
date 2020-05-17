@@ -45,8 +45,6 @@ def getdata():
 		error_msg = "Please check you internet connectivity and then try again later."
 		error_prompt = Label(screen , text = error_msg , font=("courier", 14), fg = "red" , bg = "black")
 		error_prompt.pack()
-		sleep(50)
-		exit()
 
 
 	if handle_request(data):
