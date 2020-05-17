@@ -51,7 +51,7 @@ def getdata():
 	if handle_request(data):
 		#Fetch Data
 
-		extractor = re.compile(r',<\s*?div\s*?class\s*?=\s*?\"maincounter-number\".*?>\n*?<span.*?>(.*)<\/span>\n*?<\s*\/div\s*>')
+		extractor = re.compile(r'<\s*?div\s*?class\s*?=\s*?\"maincounter-number\".*?>\n*?<span.*?>(.*)<\/span>\n*?<\s*\/div\s*>')
 		numbers = extractor.findall(data.text)
 
 
