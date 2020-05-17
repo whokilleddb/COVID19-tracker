@@ -2,7 +2,7 @@
 
 This micro-project aims to provide Real Time data of the COVID19 cases in each country.
 
-## Motivation : 
+## Motivation :
 
 Initially a basic web-scrapping project for extracting data of the COVID cases,later we decided to make the data accessible in the layman way.A great deal of focus goes into implementing our task effeciently with minimum dependencies and wihtout consuming much resources.
 
@@ -10,7 +10,7 @@ Initially a basic web-scrapping project for extracting data of the COVID cases,l
 
 ## Prerequisits :
 
-Python 3.x and Python IDLE/Shell 
+Python 3.x and Python IDLE/Shell
 
 ## Libraries Used :
 
@@ -24,7 +24,7 @@ Make sure the the required Libraries are installed correctly.
 1. Clone the repository to your local machine.
 2. Open the folder of the cloned repository.
 3. Open the CommandLine from that folder.
-and then type 
+and then type
 ```
 python3 COVID19-tracker.py
 ```
@@ -37,18 +37,18 @@ python COVID19-tracker.py
 4.The opening window should look like this.
 <a name="Instance1"/>
 <div align="center">
-<img src="Instance1.png" alt="Opening Window" width="500" height="350"></img>
+<img src="Images/Instance1.png" alt="Opening Window" width="500" height="350"></img>
 </div>
 <br/>
 5.Type in the Country Name you wan to search for.For eg:India or USA<br/>
 6.The created report will look like this:
 <a name="Instance2"/>
 <div align="center">
-<img src="Instance2.png" alt="Created Rport" width="500" height="350"></img>
+<img src="Images/Instance2.png" alt="Created Rport" width="500" height="350"></img>
 </div>
 <br/>
 
-## DataBase : 
+## DataBase :
 
 The application get's it's information from this [database](https://www.worldometers.info/coronavirus)
 

@@ -113,7 +113,7 @@ if __name__=='__main__':
 	screen.configure(bg = "black")
 	screen.geometry("900x500")
 
-	bg_image = ImageTk.PhotoImage(Image.open("bg.jpeg"))
+	bg_image = ImageTk.PhotoImage(Image.open("Images/bg.jpeg"))
 	bg_label = Label(image = bg_image)
 	bg_label.place(x=0, y=0, relwidth=0.6, relheight=1.2)
 
