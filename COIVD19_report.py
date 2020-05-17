@@ -1,7 +1,7 @@
 import re,os,requests
 from tkinter import *
 from datetime import datetime
-from import sleep
+from time import sleep
 
 def getcountry():
 	#Get Country Name For URL
@@ -57,7 +57,7 @@ def getdata():
 
 		if len(numbers) !=3 :
 			error_msg = "No inforamtion found for the given country.\nPlease recheck if the given Country name is valid"
-			error_prompt = Label(screen , text = Err_msg , font=("courier", 14), fg = "red", bg = "black")
+			error_prompt = Label(screen , text = error_msg , font=("courier", 14), fg = "red", bg = "black")
 			error_prompt.pack()
 
 		else:
@@ -108,25 +108,24 @@ def getdata():
 			new_text = Label(screen, text = tcases , fg = "yellow", bg = "black")
 			new_text.pack()
 
+if __name__=='__main__':
+		screen = Tk()
+		screen.title("Covid 19 Tracker")
+		screen.configure(bg = "black")
+		screen.geometry("900x500")
 
-screen = Tk()
-screen.title("Covid 19 Tracker")
-screen.configure(bg = "black")
-screen.geometry("900x500")
+		#Display Intro Text
+		welcome_text = Label(screen, text = "COVID19 Tracker", font = ("aria",30,'bold','italic'), fg = "steel blue", bg = "black")
+		welcome_text.pack()
 
-#Display Intro Text
-welcome_text = Label(screen, text = "COVID19 Tracker", font = ("aria",30,'bold','italic'), fg = "steel blue", bg = "black")
-welcome_text.pack()
+		#Getting String From User
+		namestr = StringVar()
+		name = Entry( textvariable = namestr )
 
-#Getting String From User
-namestr = StringVar()
-name = Entry( textvariable = namestr )
+		#Creating Button
+		click_me = Button (text = "Run Check" , fg = "black" , bg = "green" , command = getdata )
 
-#Creating Button
-click_me = Button (text = "Run Check" , fg = "black" , bg = "green" , command = getdata )
+		name.pack()
+		click_me.pack()
 
-name.pack()
-click_me.pack()
-
-
-screen.mainloop()
+		screen.mainloop()
