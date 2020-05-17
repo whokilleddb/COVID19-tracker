@@ -10,11 +10,6 @@ except ImportError:
 	lookup = platform.system()
 	if lookup == 'Linux':
 		os.system('sudo apt-get install python3-pil python3-pil.imagetk')
-	
-	
-
-
-
 
 def getcountry():
 	#Get Country Name For URL
