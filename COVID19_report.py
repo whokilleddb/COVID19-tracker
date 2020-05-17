@@ -9,7 +9,7 @@ except ImportError:
 	os.system('pip3 install pillow')
 	lookup = platform.system()
 	if lookup == 'Linux':
-		os.system('sudo apt-get install python3-pil python3-pil.imagetk')
+		os.system('sudo apt-get install python3-pil.imagetk')
 	
 	
 
