@@ -1,5 +1,6 @@
 import re,os,requests
 from tkinter import *
+from PIL import ImageTk, Image
 from datetime import datetime
 from time import sleep
 
@@ -109,23 +110,27 @@ def getdata():
 			new_text.pack()
 
 if __name__=='__main__':
-		screen = Tk()
-		screen.title("Covid 19 Tracker")
-		screen.configure(bg = "black")
-		screen.geometry("900x500")
+	screen = Tk()
+	screen.title("Covid 19 Tracker")
+	screen.configure(bg = "black")
+	screen.geometry("900x500")
 
-		#Display Intro Text
-		welcome_text = Label(screen, text = "COVID19 Tracker", font = ("aria",30,'bold','italic'), fg = "steel blue", bg = "black")
-		welcome_text.pack()
+	bg_image = ImageTk.PhotoImage(Image.open("bg.jpeg"))
+	bg_label = Label(image = bg_image)
+	bg_label.place(x=0, y=0, relwidth=0.6, relheight=1.2)
 
-		#Getting String From User
-		namestr = StringVar()
-		name = Entry( textvariable = namestr )
+	#Display Intro Text
+	welcome_text = Label(screen, text = "COVID19 Tracker", font = ("aria",30,'bold','italic'), fg = "steel blue", bg = "black")
+	welcome_text.pack()
 
-		#Creating Button
-		click_me = Button (text = "Run Check" , fg = "black" , bg = "green" , command = getdata )
+	#Getting String From User
+	namestr = StringVar()
+	name = Entry( textvariable = namestr )
 
-		name.pack()
-		click_me.pack()
+	#Creating Button
+	click_me = Button (text = "Run Check", fg = "black", bg = "green", command = getdata )
 
-		screen.mainloop()
+	name.pack()
+	click_me.pack()
+
+	screen.mainloop()
