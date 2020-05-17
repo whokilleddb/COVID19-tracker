@@ -1,7 +1,7 @@
 import re,os,requests
 from tkinter import *
 from datetime import datetime
-import time
+from import sleep
 
 def getcountry():
 	#Get Country Name For URL
@@ -22,17 +22,15 @@ def handle_request(request):
 		return True
 
 	if request.status_code == 404:
-		Error_prompt = "Client Side Error: Unidentified Methods or Restriced Action\nYour computer failed to access the website due to internal failure."
-		error_text  = Label(screen , text = Error_prompt , fg = "red" , bg = "black")
-		error_text.config(font=("courier", 14))
-		error_text.pack()
+		error_msg = "Client Side Error: Unidentified Methods or Restriced Action\nYour computer failed to access the website due to internal failure."
+		error_prompt = Label(screen , text = eror_msg , font=("courier", 14), fg = "red" , bg = "black")
+		error_prompt.pack()
 		return False
 
 	if request.status_code == 500 or request.status_code == 501 :
-		Error_prompt = "We recieved an error on the server side.Please try again after some time"
-		error_text  = Label(screen , text = Error_prompt , fg = "red" , bg = "black")
-		error_text.config(font=("courier", 14))
-		error_text.pack()
+		error_msg = "We recieved an error on the server side.Please try again after some time"
+		error_prompt = Label(screen , text = error_msg , font=("courier", 14), fg = "red" , bg = "black")
+		error_prompt.pack()
 		return False
 	return False
 
@@ -43,25 +41,24 @@ def getdata():
 	try:
 		data = requests.get("https://www.worldometers.info/coronavirus/country/" + country_name + "/")
 	except  OSError :
-		Err_msg = "Please check you internet connectivity and then try again later."
-		err_prompt = Label(screen , text = Err_msg , fg = "red" , bg = "black")
-		err_prompt.pack()
-		time.sleep(5)
+		error_msg = "Please check you internet connectivity and then try again later."
+		error_prompt = Label(screen , text = error_msg , font=("courier", 14), fg = "red" , bg = "black")
+		error_prompt.pack()
+		sleep(50)
 		exit()
 
 
 	if handle_request(data):
-		#Fetch Data			new_text.config(font=("courier", 16))
+		#Fetch Data
 
-		extractor = re.compile(r'<\s*?div\s*?class\s*?=\s*?\"maincounter-number\".*?>\n*?<span.*?>(.*)<\/span>\n*?<\s*\/div\s*>')
+		extractor = re.compile(r',<\s*?div\s*?class\s*?=\s*?\"maincounter-number\".*?>\n*?<span.*?>(.*)<\/span>\n*?<\s*\/div\s*>')
 		numbers = extractor.findall(data.text)
 
 
 		if len(numbers) !=3 :
-			Err_msg = "No inforamtion found for the given country.\nPlease recheck if the given Country name is valid"
-			err_prompt = Label(screen , text = Err_msg , fg = "red" , bg = "black")
-			new_text.config(font=("courier", 14))
-			err_prompt.pack()
+			error_msg = "No inforamtion found for the given country.\nPlease recheck if the given Country name is valid"
+			error_prompt = Label(screen , text = Err_msg , font=("courier", 14), fg = "red", bg = "black")
+			error_prompt.pack()
 
 		else:
 			for i in range(0,len(numbers)):
@@ -71,37 +68,44 @@ def getdata():
 			date_obj = datetime.now()
 			date = date_obj.strftime("%d/%m/%Y  at %H:%M:%S")
 			text = "\nReport created on " + date
-			new_text = Label(screen , text = text , fg = "yellow" , bg = "black",anchor= "w")
-			new_text.config(font=("courier", 9))
+			new_text = Label(screen, text = text, font=("courier", 9), fg = "yellow", bg = "black", anchor= "w")
 			new_text.pack()
 
 
 			tcases = "\nShowing Report For : {}".format(country_name.upper())
-			new_text = Label(screen , text = tcases , fg = "green" , bg = "black")
-			new_text.config(font=("courier", 16))
+			new_text = Label(screen, text = tcases, font=("courier", 16), fg = "green", bg = "black")
 			new_text.pack()
 
 
 			#Show Total Cases
 			tcases = "\rTotal cases\t: "+numbers[0]
-			new_text = Label(screen , text = tcases , fg = "yellow" , bg = "black")
-			new_text.config(font=("courier", 13))
+			new_text = Label(screen, text = tcases, font=("courier", 13), fg = "yellow", bg = "black")
+			new_text.config()
 			new_text.pack()
 
 			#Show Total Deaths
 			tcases = "\rTotal deaths\t: "+numbers[1]
-			new_text = Label(screen , text = tcases , fg = "yellow" , bg = "black")
-			new_text.config(font=("courier", 13))
+			new_text = Label(screen , text = tcases ,font=("courier", 13) , fg = "yellow", bg = "black")
 			new_text.pack()
 
 			#Show Total Recovered
 			tcases = "\rTotal Recovered\t: "+numbers[2]
-			new_text = Label(screen , text = tcases , fg = "yellow" , bg = "black")
-			new_text.config(font=("courier", 13))
+			new_text = Label(screen ,text = tcases, font=("courier", 13), fg = "yellow", bg = "black")
 			new_text.pack()
 
-			tcases = "\n---------------------------------------------------\n"
-			new_text = Label(screen , text = tcases , fg = "yellow" , bg = "black")
+			extractor1 = re.compile(r'<\s?li\s*class="news_li".*?>(.*)\sin')
+			text = extractor1.findall(data.text)
+			report = "\nToday's Cases : " + re.sub(r'(<strong>|<\/strong>)','',text[0])
+			report1 = "Yesterday's Cases : " + re.sub(r'(<strong>|<\/strong>)','',text[1])
+
+
+			new_text = Label(screen , text = report ,font=("courier", 13), fg = "yellow" , bg = "black")
+			new_text.pack()
+			new_text = Label(screen , text = report1 ,font=("courier", 13), fg = "yellow" , bg = "black")
+			new_text.pack()
+
+			tcases = "\n---------------------------------------------------------------\n"
+			new_text = Label(screen, text = tcases , fg = "yellow", bg = "black")
 			new_text.pack()
 
 
@@ -111,11 +115,11 @@ screen.configure(bg = "black")
 screen.geometry("900x500")
 
 #Display Intro Text
-welcome_text = Label(screen , text = "Coded at SigmaX" , font = ("Courier",24) ,fg = "white" , bg = "black")
+welcome_text = Label(screen, text = "COVID19 Tracker", font = ("aria",30,'bold','italic'), fg = "steel blue", bg = "black")
 welcome_text.pack()
 
 #Getting String From User
-namestr=StringVar()
+namestr = StringVar()
 name = Entry( textvariable = namestr )
 
 #Creating Button
